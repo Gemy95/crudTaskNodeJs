@@ -1,0 +1,10 @@
+module.exports.colors={
+    red:"red",
+    blue:"blue",
+    green:"green",
+    black:"black",
+    orange:"orange",
+    white:"white",
+    brown:"brown",
+    yellow:"yellow"
+}

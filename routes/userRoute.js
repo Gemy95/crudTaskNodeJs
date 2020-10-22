@@ -2,10 +2,6 @@ const express = require('express');
 const router = express.Router();
 let userController= require('../controllers/userController');
 let userValidation= require('../helpers/userValidation');
-/* GET users listing. */
-router.get('/', function(req, res, next) {
-  res.send('respond with a resource');
-});
 
 
 /**

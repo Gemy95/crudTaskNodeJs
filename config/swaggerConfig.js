@@ -12,14 +12,14 @@ module.exports.options= {
             "application/xml"
         ],
         schemes: ['http', 'https'],
-       /* securityDefinitions: {
+        securityDefinitions: {
             JWT: {
                 type: 'apiKey',
                 in: 'header',
-                name: 'Authorization',
+                name: 'token',
                 description: "",
             }
-        }*/
+        }
     },
     basedir: __dirname, //app absolute path
     files: ['../routes/**/*.js'] //Path to the API handle folder

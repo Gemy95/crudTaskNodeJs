@@ -8,7 +8,6 @@ module.exports.userRegistration = async (userObj) => {
         let user = await userModel.createUser(userObj);
         return true;
     } catch (error) {
-        console.log("error user service register" + error)
         throw error;
     }
 }

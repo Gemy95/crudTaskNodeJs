@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 const bcrypt = require('bcrypt');
+const device= require('./device');
 
 let userSchema = mongoose.Schema({
     fullName: { type: String },
@@ -8,6 +9,7 @@ let userSchema = mongoose.Schema({
     age: { type: Number},
     phoneNumber: { type: String},
     address: { type: String},
+    devices:[{type:mongoose.Schema.Types.ObjectId,ref:"devices"}]
 },{
     timestamps:true
 });
@@ -44,6 +46,18 @@ userSchema.statics.findUser = async (userEmail) => {
     })
 };
 
+
+userSchema.statics.addDeviceByUser = async (userId,deviceId) => {
+    console.log("userId="+userId);
+    console.log("deviceId="+deviceId);
+    return new Promise((resolve, reject) => {
+        userModel.updateOne({"_id":userId},{ $push:{devices: deviceId }}).then((data) => {
+            resolve(data);
+        }).catch((err) => {
+            reject(err);
+        })
+    })
+};
 
 
 

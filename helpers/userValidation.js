@@ -1,0 +1,20 @@
+const { body, validationResult } = require('express-validator');
+
+module.exports.validateRegisterUser = ()=>{
+  return  [
+        body('fullName').not().isEmpty().withMessage(`required fullName`),
+        body('email').isEmail().withMessage(`required email`).not().isEmpty().withMessage(`invalid email`),
+        body('password').isLength({ min: 5 }).withMessage(`invalid minimum password length 5 letter `).not().isEmpty().withMessage(`invalid password`),
+        body('age').not().isEmpty().withMessage(`invalid age`),
+        body('phoneNumber').not().isEmpty().withMessage(`required phoneNumber`),
+        body('address').not().isEmpty().withMessage(`required address`),
+      ]
+}
+
+module.exports.validateLoginUser = ()=>{
+  return  [
+        body('email').isEmail().withMessage(`required email`).not().isEmpty().withMessage(`invalid email`),
+        body('password').isLength({ min: 5 }).withMessage(`invalid minimum password length 5 letter `).not().isEmpty().withMessage(`invalid password`),
+      ]
+}
+

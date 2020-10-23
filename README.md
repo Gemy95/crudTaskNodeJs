@@ -19,16 +19,24 @@ _______________________________________________________________________
 
 NOTE: we need to excute these steps to make process working properly:
 _______________________________________________________________________
+
 - for running application:- 
+
 1- npm i (it will install all needed dependancies)
+
 2- npm start (it will run application as nodemon)
 
-- for crating database
+
+- for creating database
+
 3- creating database in mongodb called taskDB
 
+
 - for test cases using mocka famework and chai js module:-
-5- mocha --timeout 15000
-6- npm test 
+
+4- mocha --timeout 15000
+
+5- npm test 
 
 
 

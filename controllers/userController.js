@@ -27,7 +27,11 @@ module.exports.userLogin = async (req, res) => {
             return res.status(400).json({ "msessage": errors.array() });
 
         let result = await userService.userLogin(req.body);
-        return res.status(200).json({ "message": result.message, "token": result.token });
+
+        if (result.checkLogin)
+            return res.status(200).json({ "message": result.message, "user": result.user, "token": result.token });
+        else
+            res.status(400).json({ "message": `user login failed, ${result.message}` });
 
     } catch (error) {
         res.status(400).json({

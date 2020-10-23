@@ -37,6 +37,28 @@ deviceSchema.statics.getUserDevices = async (userId) => {
 };
 
 
+deviceSchema.statics.getUserDeviceData = async (userId,deviceId) => {
+    return new Promise((resolve, reject) => {
+        deviceModel.findOne({"_id":deviceId}).populate(userId).then((data) => {
+            resolve(data);
+        }).catch((err) => {
+            reject(err);
+        })
+    })
+};
+
+
+
+deviceSchema.statics.getDeviceData = async (deviceId) => {
+    return new Promise((resolve, reject) => {
+        deviceModel.findOne({"_id":deviceId}).then((data) => {
+            resolve(data);
+        }).catch((err) => {
+            reject(err);
+        })
+    })
+};
+
 
 let deviceModel=mongoose.model("devices", deviceSchema);
 

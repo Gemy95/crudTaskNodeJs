@@ -17,10 +17,12 @@ module.exports.userLogin = async (user) => {
         let storedUser = await userModel.findUser(user.email);
         if (storedUser) {
             if (bcrypt.compareSync(user.password, storedUser.password)) {
+                delete storedUser.devices; 
+                delete storedUser.password; 
                 let customUser = storedUser;
-                delete customUser.password;
+
                 let token = jwt.sign({ "user": customUser }, process.env.secretKey);
-                return { "checkLogin": false, "message": "user logined successfully", "token": token };
+                return { "checkLogin": true, "message": "user logined successfully","user":customUser, "token": token };
             }
             else {
                 return { "checkLogin": false, "message": "user password not matchs" };

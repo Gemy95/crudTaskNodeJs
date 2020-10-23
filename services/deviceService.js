@@ -21,3 +21,25 @@ module.exports.getUserDevices = async (userId) => {
         throw error;
     }
 }
+
+module.exports.getUserDeviceData = async (userId,deviceId) => {
+    try {
+        let userDeviceData = await deviceModel.getUserDeviceData(userId,deviceId);
+        return userDeviceData;
+    } catch (error) {
+        throw error;
+    }
+}
+
+
+module.exports.getDeviceData = async (deviceId) => {
+    try {
+        let deviceData = await deviceModel.getDeviceData(deviceId);
+        return deviceData;
+    } catch (error) {
+        throw error;
+    }
+}
+
+
+

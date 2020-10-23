@@ -1,4 +1,4 @@
-const { body, validationResult } = require('express-validator');
+const { query, body, validationResult } = require('express-validator');
 
 module.exports.validateCreateDevice = ()=>{
     return  [
@@ -11,3 +11,10 @@ module.exports.validateCreateDevice = ()=>{
           body('weight').not().isEmpty().withMessage(`required weight`).isNumeric().withMessage(`weight not number`)
         ]
   }
+
+  module.exports.validateDeviceId = ()=>{
+      return  [
+        query('deviceId').not().isEmpty().withMessage(`required deviceId`).isString().withMessage(`deviceId must be string`)
+          ]
+    }
+    

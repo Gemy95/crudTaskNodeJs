@@ -1,9 +1,9 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
-let deviceController= require('../controllers/deviceController');
-let deviceValidation= require('../helpers/deviceValidation');
-let userValidation= require('../helpers/userValidation');
-let authMiddleware= require('../middlewares/authMiddleware'); 
+let deviceController= require("../controllers/deviceController");
+let deviceValidation= require("../helpers/deviceValidation");
+let userValidation= require("../helpers/userValidation");
+let authMiddleware= require("../middlewares/authMiddleware"); 
 
 /**
  * @typedef createDevice
@@ -24,7 +24,43 @@ let authMiddleware= require('../middlewares/authMiddleware');
  * @returns {object} 200 - An array of user info
  * @returns {Error}  default - Unexpected error
  */
-router.post('/createDevice',authMiddleware,deviceValidation.validateCreateDevice(), deviceController.createDevice);
+router.post("/createDevice",authMiddleware,deviceValidation.validateCreateDevice(), deviceController.createDevice);
+
+
+/**
+ * @route Post /api/devices/addDevice
+ * @group crud - Operations about user
+ * @security JWT 
+ * @returns {object} 200 - An array of user info
+ * @returns {Error}  default - Unexpected error
+ */
+router.post("/addDevice",authMiddleware, deviceController.addDevice);
+
+
+/**
+ * @typedef updateDevice
+ * @property {string} userId.required -
+ * @property {string} deviceId.required -
+ * @property {string} deviceName.required -
+ * @property {string} categoryName.required - 
+ * @property {string} color.required -
+ * @property {string} barcode.required - 
+ * @property {number} price.required
+ * @property {number} quantity.required -
+ * @property {number} weight.required -
+ */
+
+/**
+ * @route Put /api/devices/updateDevice
+ * @group crud - Operations about user
+ * @security JWT
+ * @param {updateDevice.model} body.body.required 
+ * @returns {object} 200 - An array of user info
+ * @returns {Error}  default - Unexpected error
+ */
+router.put("/updateDevice",authMiddleware,userValidation.validateUserIdBody(),deviceValidation.validateDeviceIdBody(),deviceValidation.validateCreateDevice(), deviceController.updateDevice);
+
+
 
 
 /**
@@ -35,7 +71,7 @@ router.post('/createDevice',authMiddleware,deviceValidation.validateCreateDevice
  * @returns {object} 200 - An array of user info
  * @returns {Error}  default - Unexpected error
  */
-router.post('/getUserDevices',authMiddleware,userValidation.validateUserId(), deviceController.getUserDevices);
+router.post("/getUserDevices",authMiddleware,userValidation.validateUserId(), deviceController.getUserDevices);
 
 
 /**
@@ -47,7 +83,7 @@ router.post('/getUserDevices',authMiddleware,userValidation.validateUserId(), de
  * @returns {object} 200 - An array of user info
  * @returns {Error}  default - Unexpected error
  */
-router.post('/getUserDeviceData',authMiddleware,userValidation.validateUserId(),deviceValidation.validateDeviceId(), deviceController.getUserDeviceData);
+router.post("/getUserDeviceData",authMiddleware,userValidation.validateUserId(),deviceValidation.validateDeviceId(), deviceController.getUserDeviceData);
 
 
 /**
@@ -58,7 +94,7 @@ router.post('/getUserDeviceData',authMiddleware,userValidation.validateUserId(),
  * @returns {object} 200 - An array of user info
  * @returns {Error}  default - Unexpected error
  */
-router.post('/getDeviceData',authMiddleware,deviceValidation.validateDeviceId(), deviceController.getDeviceData);
+router.post("/getDeviceData",authMiddleware,deviceValidation.validateDeviceId(), deviceController.getDeviceData);
 
 
 

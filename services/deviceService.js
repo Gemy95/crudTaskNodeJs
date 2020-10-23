@@ -1,45 +1,50 @@
-let deviceModel = require('../models/device');
-let userModel = require('../models/user');
-let jwt = require('jsonwebtoken');
-require('dotenv').config();
+let deviceModel = require("../models/device");
+let userModel = require("../models/user");
+require("dotenv").config();
 
-module.exports.createDevice = async (deviceObj,user) => {
-    try {
+module.exports.createDevice = async (deviceObj, user) => {
         let device = await deviceModel.createDevice(deviceObj);
-        let addDeviceToUser = await userModel.addDeviceByUser(user._id,device._id); 
+        await userModel.addDeviceByUser(user._id, device._id);
         return true;
-    } catch (error) {
-        throw error;
-    }
-}
+};
+
+module.exports.addDevice = async (deviceObj, user) => {
+        let device = await deviceModel.createDevice(deviceObj);
+        await userModel.addDeviceByUser(user._id, device._id);
+        return true;
+};
+
+module.exports.updateDevice = async (body) => {
+        let userArrayDevices = (await userModel.findUserArrayDevices(body.userId)).devices || [];
+        let deviceId = body.deviceId.toString();
+        let updatedDevice = body;
+        delete updatedDevice.userId;
+        delete updatedDevice.deviceId;
+
+        if ( userArrayDevices!=undefined && Array.isArray(userArrayDevices) && userArrayDevices.includes(`${deviceId}`)) {
+                await deviceModel.updateDevice(deviceId,updatedDevice);
+                return true;
+        } else {
+                return false;
+        }
+};
+
 
 module.exports.getUserDevices = async (userId) => {
-    try {
         let userDevices = await deviceModel.getUserDevices(userId);
         return userDevices;
-    } catch (error) {
-        throw error;
-    }
-}
+};
 
-module.exports.getUserDeviceData = async (userId,deviceId) => {
-    try {
-        let userDeviceData = await deviceModel.getUserDeviceData(userId,deviceId);
+module.exports.getUserDeviceData = async (userId, deviceId) => {
+        let userDeviceData = await deviceModel.getUserDeviceData(userId, deviceId);
         return userDeviceData;
-    } catch (error) {
-        throw error;
-    }
-}
+};
 
 
 module.exports.getDeviceData = async (deviceId) => {
-    try {
         let deviceData = await deviceModel.getDeviceData(deviceId);
         return deviceData;
-    } catch (error) {
-        throw error;
-    }
-}
+};
 
 
 

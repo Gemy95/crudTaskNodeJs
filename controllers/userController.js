@@ -1,5 +1,5 @@
-const { body, validationResult } = require('express-validator');
-let userService = require('../services/userService');
+const { validationResult } = require("express-validator");
+let userService = require("../services/userService");
 
 module.exports.userRegistration = async (req, res) => {
     try {
@@ -8,7 +8,7 @@ module.exports.userRegistration = async (req, res) => {
             //return res.status(400).json({ "msessage": errors.array()[0].msg });
             return res.status(400).json({ "msessage": errors.array() });
 
-        let result = await userService.userRegistration(req.body);
+         await userService.userRegistration(req.body);
         return res.status(200).json({ "message": "user created successfully" });
 
     } catch (error) {
@@ -16,7 +16,7 @@ module.exports.userRegistration = async (req, res) => {
             "message": `user created failed, ${error.message}`
         });
     }
-}
+};
 
 
 module.exports.userLogin = async (req, res) => {
@@ -27,7 +27,8 @@ module.exports.userLogin = async (req, res) => {
            res.status(400).json({ "msessage": errors.array() });
 
         let result = await userService.userLogin(req.body);
-
+         delete result.user.devices;
+         delete result.user.password;
         if (result.checkLogin)
              res.status(200).json({ "message": result.message, "user": result.user, "token": result.token });
         else
@@ -38,6 +39,6 @@ module.exports.userLogin = async (req, res) => {
             "message": `user login failed, ${error.message}`,"user":{}, "token":""
         });
     }
-}
+};
 
 

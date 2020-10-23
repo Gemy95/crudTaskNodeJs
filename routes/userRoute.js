@@ -1,7 +1,7 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
-let userController= require('../controllers/userController');
-let userValidation= require('../helpers/userValidation');
+let userController= require("../controllers/userController");
+let userValidation= require("../helpers/userValidation");
 
 
 /**
@@ -21,7 +21,7 @@ let userValidation= require('../helpers/userValidation');
  * @returns {object} 200 - An array of user info
  * @returns {Error}  default - Unexpected error
  */
-router.post('/userRegistration',userValidation.validateRegisterUser(), userController.userRegistration);
+router.post("/userRegistration",userValidation.validateRegisterUser(), userController.userRegistration);
 
 
 /**
@@ -37,7 +37,7 @@ router.post('/userRegistration',userValidation.validateRegisterUser(), userContr
  * @returns {object} 200 - An array of user info
  * @returns {Error}  default - Unexpected error
  */
-router.post('/userLogin',userValidation.validateLoginUser(), userController.userLogin);
+router.post("/userLogin",userValidation.validateLoginUser(), userController.userLogin);
 
 
 

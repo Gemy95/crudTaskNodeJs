@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-let colors= require('../enums/colors');
+let colors= require("../enums/colors");
 
 let deviceSchema = mongoose.Schema({
     deviceName: { type: String },
@@ -25,8 +25,18 @@ deviceSchema.statics.createDevice = async (deviceObj) => {
             resolve(data);
         }).catch((err) => {
             reject(err);
-        })
-    })
+        });
+    });
+};
+
+deviceSchema.statics.updateDevice = async (deviceId,deviceObj) => {
+    return new Promise((resolve, reject) => {
+        deviceModel.updateOne({"_id":deviceId},deviceObj).then((data) => {
+            resolve(data);
+        }).catch((err) => {
+            reject(err);
+        });
+    });
 };
 
 
@@ -37,8 +47,8 @@ deviceSchema.statics.getUserDevices = async (userId) => {
             resolve(data);
         }).catch((err) => {
             reject(err);
-        })
-    })
+        });
+    });
 };
 
 
@@ -48,8 +58,8 @@ deviceSchema.statics.getUserDeviceData = async (userId,deviceId) => {
             resolve(data);
         }).catch((err) => {
             reject(err);
-        })
-    })
+        });
+    });
 };
 
 
@@ -60,8 +70,8 @@ deviceSchema.statics.getDeviceData = async (deviceId) => {
             resolve(data);
         }).catch((err) => {
             reject(err);
-        })
-    })
+        });
+    });
 };
 
 

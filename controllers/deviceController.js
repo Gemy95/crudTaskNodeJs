@@ -1,5 +1,5 @@
-const { body, validationResult } = require('express-validator');
-let deviceService = require('../services/deviceService');
+const { validationResult } = require("express-validator");
+let deviceService = require("../services/deviceService");
 
 module.exports.createDevice = async (req, res) => {
     try {
@@ -8,7 +8,7 @@ module.exports.createDevice = async (req, res) => {
             //return res.status(400).json({ "msessage": errors.array()[0].msg });
             return res.status(400).json({ "msessage": errors.array() });
 
-        let result = await deviceService.createDevice(req.body,req.user);
+         await deviceService.createDevice(req.body,req.user);
         return res.status(200).json({ "message": "device created successfully" });
 
     } catch (error) {
@@ -16,7 +16,42 @@ module.exports.createDevice = async (req, res) => {
             "message": `device created failed, ${error.message}`
         });
     }
-}
+};
+
+module.exports.addDevice = async (req, res) => {
+    try {
+        
+        await deviceService.createDevice({},req.user);
+        return res.status(200).json({ "message": "device added successfully" });
+
+    } catch (error) {
+        res.status(400).json({
+            "message": `device added failed, ${error.message}`
+        });
+    }
+};
+
+module.exports.updateDevice = async (req, res) => {
+    try {
+        const errors = validationResult(req);
+        if (!errors.isEmpty())
+            //return res.status(400).json({ "msessage": errors.array()[0].msg });
+            return res.status(400).json({ "msessage": errors.array() });
+         let result= await deviceService.updateDevice(req.body);
+         if(result){
+            return res.status(200).json({ "message": "device updated successfully" });
+         }
+         else{
+            res.status(400).json({
+                "message": "device updated failed, not allowed this user update device"
+            });
+         }
+    } catch (error) {
+        res.status(400).json({
+            "message": `device updated failed, ${error.message}`
+        });
+    }
+};
 
 module.exports.getUserDevices = async (req, res) => {
     try {
@@ -33,7 +68,7 @@ module.exports.getUserDevices = async (req, res) => {
             "message": `get user devices failed, ${error.message}`
         });
     }
-}
+};
 
 
 module.exports.getUserDeviceData = async (req, res) => {
@@ -51,7 +86,7 @@ module.exports.getUserDeviceData = async (req, res) => {
             "message": `get user device data failed, ${error.message}`
         });
     }
-}
+};
 
 
 module.exports.getDeviceData = async (req, res) => {
@@ -69,5 +104,5 @@ module.exports.getDeviceData = async (req, res) => {
             "message": `get device data failed, ${error.message}`
         });
     }
-}
+};
 

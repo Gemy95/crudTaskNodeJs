@@ -1,6 +1,5 @@
 const mongoose = require("mongoose");
-const bcrypt = require('bcrypt');
-const deviceModel= require('./device');
+const bcrypt = require("bcrypt")
 
 let userSchema = mongoose.Schema({
     fullName: { type: String },
@@ -11,7 +10,12 @@ let userSchema = mongoose.Schema({
     address: { type: String},
     devices:[{type:mongoose.Schema.Types.ObjectId,ref:"devices"}]
 },{
-    timestamps:true
+    timestamps:true,
+    toJSON: {
+        transform: function (doc, ret) {
+            delete ret.__v;
+        }
+    }
 });
 
 

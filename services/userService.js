@@ -13,8 +13,8 @@ module.exports.userRegistration = async (userObj) => {
 }
 
 module.exports.userLogin = async (user) => {
-    try {
-        let storedUser = await userModel.findUser(user.email);
+    try { 
+        let storedUser = await userModel.findUser(user.email)
         if (storedUser) {
             if (bcrypt.compareSync(user.password, storedUser.password)) {
                 delete storedUser.devices; 

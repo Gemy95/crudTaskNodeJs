@@ -20,22 +20,22 @@ module.exports.userRegistration = async (req, res) => {
 
 
 module.exports.userLogin = async (req, res) => {
-    try {
+    try { 
         const errors = validationResult(req);
         if (!errors.isEmpty())
             //return res.status(400).json({ "msessage": errors.array()[0].msg });
-            return res.status(400).json({ "msessage": errors.array() });
+           res.status(400).json({ "msessage": errors.array() });
 
         let result = await userService.userLogin(req.body);
 
         if (result.checkLogin)
-            return res.status(200).json({ "message": result.message, "user": result.user, "token": result.token });
+             res.status(200).json({ "message": result.message, "user": result.user, "token": result.token });
         else
-            res.status(400).json({ "message": `user login failed, ${result.message}` });
+            res.status(400).json({ "message": `user login failed, ${result.message}`,"user":{}, "token":"" });
 
     } catch (error) {
         res.status(400).json({
-            "message": `user login failed, ${error.message}`
+            "message": `user login failed, ${error.message}`,"user":{}, "token":""
         });
     }
 }

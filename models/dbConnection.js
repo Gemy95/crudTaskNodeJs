@@ -1,15 +1,15 @@
-const mongoose = require("mongoose");
+const mongoose = require("mongoose")
 
-async function createConnection() {
+ createConnection= async () => {
     try {
-        let connection = await mongoose.connect('mongodb://localhost/taskDB', { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex:true });
+        let connection = await mongoose.connect("mongodb://localhost/taskDB", { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex:true });
         console.log("db established successfully");
         return connection;
     }
-    catch (err) {
-        console.log("db error="+err)
+    catch (error) {
+        console.log("db error="+ error)
         return err;
     }
-}
+};
 
 module.exports = createConnection;

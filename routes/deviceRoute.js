@@ -64,7 +64,7 @@ router.put("/updateDevice",authMiddleware,userValidation.validateUserIdBody(),de
 
 
 /**
- * @route Post /api/devices/getUserDevices
+ * @route Get /api/devices/getUserDevices
  * @group crud - Operations about user
  * @security JWT
  * @param {string} userId.query.required 
@@ -75,7 +75,7 @@ router.post("/getUserDevices",authMiddleware,userValidation.validateUserId(), de
 
 
 /**
- * @route Post /api/devices/getUserDeviceData
+ * @route Get /api/devices/getUserDeviceData
  * @group crud - Operations about user
  * @security JWT
  * @param {string} userId.query.required 
@@ -87,7 +87,7 @@ router.post("/getUserDeviceData",authMiddleware,userValidation.validateUserId(),
 
 
 /**
- * @route Post /api/devices/getDeviceData
+ * @route Get /api/devices/getDeviceData
  * @group crud - Operations about user
  * @security JWT
  * @param {string} deviceId.query.required 

@@ -71,7 +71,7 @@ router.put("/updateDevice",authMiddleware,userValidation.validateUserIdBody(),de
  * @returns {object} 200 - An array of user info
  * @returns {Error}  default - Unexpected error
  */
-router.post("/getUserDevices",authMiddleware,userValidation.validateUserId(), deviceController.getUserDevices);
+router.get("/getUserDevices",authMiddleware,userValidation.validateUserId(), deviceController.getUserDevices);
 
 
 /**
@@ -83,7 +83,7 @@ router.post("/getUserDevices",authMiddleware,userValidation.validateUserId(), de
  * @returns {object} 200 - An array of user info
  * @returns {Error}  default - Unexpected error
  */
-router.post("/getUserDeviceData",authMiddleware,userValidation.validateUserId(),deviceValidation.validateDeviceId(), deviceController.getUserDeviceData);
+router.get("/getUserDeviceData",authMiddleware,userValidation.validateUserId(),deviceValidation.validateDeviceId(), deviceController.getUserDeviceData);
 
 
 /**
@@ -94,7 +94,7 @@ router.post("/getUserDeviceData",authMiddleware,userValidation.validateUserId(),
  * @returns {object} 200 - An array of user info
  * @returns {Error}  default - Unexpected error
  */
-router.post("/getDeviceData",authMiddleware,deviceValidation.validateDeviceId(), deviceController.getDeviceData);
+router.get("/getDeviceData",authMiddleware,deviceValidation.validateDeviceId(), deviceController.getDeviceData);
 
 
 

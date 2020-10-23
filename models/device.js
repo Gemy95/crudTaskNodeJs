@@ -46,6 +46,7 @@ deviceSchema.statics.getUserDevices = async (userId) => {
         deviceModel.find({}).populate(userId).then((data) => {
             resolve(data);
         }).catch((err) => {
+            console.log("err="+err);
             reject(err);
         });
     });

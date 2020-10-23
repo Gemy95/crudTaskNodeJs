@@ -64,6 +64,7 @@ module.exports.getUserDevices = async (req, res) => {
         return res.status(200).json({ "message": "user devices data retrieved successfuly", "data":result });
 
     } catch (error) {
+        console.log("error="+error);
         res.status(400).json({
             "message": `get user devices failed, ${error.message}`
         });

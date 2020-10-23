@@ -24,17 +24,17 @@ deviceSchema.statics.createDevice = async (deviceObj) => {
     })
 };
 
-/*
-userSchema.statics.findUser = async (userEmail) => {
+
+
+deviceSchema.statics.getUserDevices = async (userId) => {
     return new Promise((resolve, reject) => {
-        userModel.findOne({"email":userEmail}).then((data) => {
+        deviceModel.find({}).populate(userId).then((data) => {
             resolve(data);
         }).catch((err) => {
             reject(err);
         })
     })
 };
-*/
 
 
 

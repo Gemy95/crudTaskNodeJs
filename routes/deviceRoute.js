@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 let deviceController= require('../controllers/deviceController');
 let deviceValidation= require('../helpers/deviceValidation');
+let userValidation= require('../helpers/userValidation');
 let authMiddleware= require('../middlewares/authMiddleware'); 
 
 /**
@@ -24,5 +25,19 @@ let authMiddleware= require('../middlewares/authMiddleware');
  * @returns {Error}  default - Unexpected error
  */
 router.post('/createDevice',authMiddleware,deviceValidation.validateCreateDevice(), deviceController.createDevice);
+
+
+
+
+/**
+ * @route Post /api/devices/getUserDevices
+ * @group crud - Operations about user
+ * @security JWT
+ * @param {string} userId.query.required 
+ * @returns {object} 200 - An array of user info
+ * @returns {Error}  default - Unexpected error
+ */
+router.post('/getUserDevices',userValidation.validateUserId(), deviceController.getUserDevices);
+
 
 module.exports = router;

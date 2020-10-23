@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 const bcrypt = require('bcrypt');
-const device= require('./device');
+const deviceModel= require('./device');
 
 let userSchema = mongoose.Schema({
     fullName: { type: String },

@@ -9,7 +9,15 @@ module.exports.createDevice = async (deviceObj,user) => {
         let addDeviceToUser = await userModel.addDeviceByUser(user._id,device._id); 
         return true;
     } catch (error) {
-        console.log("error device service creation" + error)
+        throw error;
+    }
+}
+
+module.exports.getUserDevices = async (userId) => {
+    try {
+        let userDevices = await deviceModel.getUserDevices(userId);
+        return userDevices;
+    } catch (error) {
         throw error;
     }
 }

@@ -1,4 +1,4 @@
-const { body, validationResult } = require('express-validator');
+const { query,body, validationResult } = require('express-validator');
 
 module.exports.validateRegisterUser = ()=>{
   return  [
@@ -17,4 +17,12 @@ module.exports.validateLoginUser = ()=>{
         body('password').isLength({ min: 5 }).withMessage(`invalid minimum password length 5 letter `).not().isEmpty().withMessage(`invalid password`),
       ]
 }
+
+module.exports.validateUserId = ()=>{
+  return  [
+    query('userId').not().isEmpty().withMessage(`required userId`).isString().withMessage(`userId must be string`)
+      ]
+}
+
+
 

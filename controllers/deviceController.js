@@ -17,3 +17,20 @@ module.exports.createDevice = async (req, res) => {
         });
     }
 }
+
+module.exports.getUserDevices = async (req, res) => {
+    try {
+        const errors = validationResult(req);
+        if (!errors.isEmpty())
+            //return res.status(400).json({ "msessage": errors.array()[0].msg });
+            return res.status(400).json({ "msessage": errors.array() });
+
+        let result = await deviceService.getUserDevices(req.query.userId);
+        return res.status(200).json({ "message": "user devices data retrieved successfuly", "data":result });
+
+    } catch (error) {
+        res.status(400).json({
+            "message": `get user devices failed, ${error.message}`
+        });
+    }
+}

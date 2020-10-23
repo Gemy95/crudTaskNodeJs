@@ -40,4 +40,5 @@ router.post('/userRegistration',userValidation.validateRegisterUser(), userContr
 router.post('/userLogin',userValidation.validateLoginUser(), userController.userLogin);
 
 
+
 module.exports = router;
